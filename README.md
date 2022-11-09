@@ -20,3 +20,6 @@ Um aplicativo simples feito para o cadastro de clientes no banco de dados MySQL 
  - [Dio, para conexão Http](https://pub.dev/packages/dio)
  - [Brasil fields, para validação de formulários com dados brasileiros (como o CPF)](https://pub.dev/packages/brasil_fields)
  - [Get, para simplificação de Snackbars e navegação entre páginas](https://pub.dev/packages/get)
+
+## Autor
+[Pablo](https://github.com/ImPabl0)
