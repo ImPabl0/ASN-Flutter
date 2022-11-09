@@ -1,5 +1,5 @@
 name: asn_flutter
-description: A new Flutter project.
+description: App da ASN para conexão com o banco de dados através da API.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -40,7 +40,7 @@ dependencies:
   dio: ^4.0.6
   flutter_launcher_icons: ^0.10.0
   get: ^4.6.5
-  cpf_cnpj_validator: ^2.0.0
+  
 
 dev_dependencies:
   flutter_test:
