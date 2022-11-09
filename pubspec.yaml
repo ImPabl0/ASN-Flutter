@@ -37,10 +37,18 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   brasil_fields: ^1.6.0
+  dio: ^4.0.6
+  flutter_launcher_icons: ^0.10.0
+  get: ^4.6.5
+  cpf_cnpj_validator: ^2.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/icon.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
