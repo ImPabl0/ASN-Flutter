@@ -15,7 +15,7 @@ class Client {
 
   register() async {
     var dio = Dio();
-    dio.options.connectTimeout = 2000;
+    dio.options.connectTimeout = 5000;
     var post = {
       "nome": nome,
       "sobrenome": sobrenome,
@@ -24,8 +24,9 @@ class Client {
       "senha": senha
     };
     try {
-      Response response = await dio.post('http://192.168.0.102:8080/register',
-          data: post, options: Options(validateStatus: ((status) {
+      Response response = await dio
+          .post('https://asnsoftware.herokuapp.com/register', data: post,
+              options: Options(validateStatus: ((status) {
         if (status == null) {
           return false;
         }

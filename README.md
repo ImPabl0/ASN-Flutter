@@ -11,7 +11,7 @@ Um aplicativo simples feito para o cadastro de clientes no banco de dados MySQL 
 ## Observações
  
  - O botão ``Login`` é meramente ilustrativo, apenas para dar contexto a função do aplicativo.
- - O endereço da api está setado para ``http://192.168.0.102:8080`` e pode ser alterado no arquivo [``/lib/services/client.dart``](https://github.com/ImPabl0/ASN-Flutter/blob/main/lib/services/client.dart#L27)
+ - O endereço da api está setado para ``https://asnsoftware.herokuapp.com/register`` e pode ser alterado no arquivo [``/lib/services/client.dart``](https://github.com/ImPabl0/ASN-Flutter/blob/main/lib/services/client.dart#L27)
  
 ## Referência
 

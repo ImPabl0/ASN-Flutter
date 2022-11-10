@@ -112,6 +112,7 @@ class _RegisterState extends State<Register> {
                                 }
                                 return null;
                               },
+                              keyboardType: TextInputType.number,
                               controller: cpf,
                               cursorColor: Colors.grey,
                               decoration: const InputDecoration(
