@@ -24,7 +24,7 @@ class Client {
       "senha": senha
     };
     try {
-      Response response = await dio.post('https://192.168.0.102:8080/register',
+      Response response = await dio.post('http://192.168.0.102:8080/register',
           data: post, options: Options(validateStatus: ((status) {
         if (status == null) {
           return false;
@@ -40,8 +40,8 @@ class Client {
       } else if (response.statusCode == 200) {
         return 0;
       }
-    } on DioError {
-      return 2;
+    } on DioError catch (ex) {
+      return ex;
     }
   }
 }

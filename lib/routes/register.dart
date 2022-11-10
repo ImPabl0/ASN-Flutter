@@ -205,6 +205,11 @@ class _RegisterState extends State<Register> {
                                         Get.off(() => Homepage());
                                         break;
                                       default:
+                                        Get.snackbar('Ops',
+                                            'Ocorreu um erro, contate o suporte.',
+                                            icon: Icon(Icons.warning),
+                                            backgroundColor:
+                                                Colors.red.withOpacity(0.1));
                                     }
                                   }
                                 },
