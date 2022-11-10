@@ -1,5 +1,7 @@
 import 'package:asn_flutter/homepage.dart';
 import 'package:asn_flutter/services/client.dart';
+import 'package:asn_flutter/services/emailvalidator.dart';
+import 'package:asn_flutter/services/validateForm.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,6 +22,18 @@ class _RegisterState extends State<Register> {
   final email = TextEditingController();
   final senha = TextEditingController();
   final rsenha = TextEditingController();
+  final FocusNode nomeFocus = FocusNode();
+  final FocusNode sobrenomeFocus = FocusNode();
+  final FocusNode cpfFocus = FocusNode();
+  final FocusNode emailFocus = FocusNode();
+  final FocusNode senhaFocus = FocusNode();
+  final FocusNode rsenhaFocus = FocusNode();
+  _fieldFocusChange(
+      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+    currentFocus.unfocus();
+    FocusScope.of(context).requestFocus(nextFocus);
+  }
+
   @override
   void dispose() {
     nome.dispose;
@@ -79,6 +93,10 @@ class _RegisterState extends State<Register> {
                         child: Column(
                           children: [
                             TextFormField(
+                              onFieldSubmitted: _fieldFocusChange(
+                                  context, nomeFocus, sobrenomeFocus),
+                              focusNode: nomeFocus,
+                              textInputAction: TextInputAction.next,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Este campo é obrigatório.';
@@ -91,6 +109,10 @@ class _RegisterState extends State<Register> {
                                   label: Text('NOME'), hoverColor: Colors.grey),
                             ),
                             TextFormField(
+                              onFieldSubmitted: _fieldFocusChange(
+                                  context, sobrenomeFocus, cpfFocus),
+                              focusNode: sobrenomeFocus,
+                              textInputAction: TextInputAction.next,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Este campo é obrigatório.';
@@ -104,6 +126,10 @@ class _RegisterState extends State<Register> {
                                   hoverColor: Colors.grey),
                             ),
                             TextFormField(
+                              onFieldSubmitted: _fieldFocusChange(
+                                  context, cpfFocus, emailFocus),
+                              focusNode: cpfFocus,
+                              textInputAction: TextInputAction.next,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Este campo é obrigatório.';
@@ -123,9 +149,15 @@ class _RegisterState extends State<Register> {
                               ],
                             ),
                             TextFormField(
+                              onFieldSubmitted: _fieldFocusChange(
+                                  context, emailFocus, senhaFocus),
+                              focusNode: emailFocus,
+                              textInputAction: TextInputAction.next,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Este campo é obrigatório.';
+                                } else if (!isValidEmail(value)) {
+                                  return 'Email inválido';
                                 }
                                 return null;
                               },
@@ -136,6 +168,10 @@ class _RegisterState extends State<Register> {
                                   hoverColor: Colors.grey),
                             ),
                             TextFormField(
+                              onFieldSubmitted: _fieldFocusChange(
+                                  context, senhaFocus, rsenhaFocus),
+                              focusNode: senhaFocus,
+                              textInputAction: TextInputAction.next,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Este campo é obrigatório.';
@@ -153,6 +189,21 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                             TextFormField(
+                              onFieldSubmitted: (value) {
+                                FocusScope.of(context)
+                                    .requestFocus(FocusNode());
+                                if (login(
+                                        _Formkey,
+                                        cpf.text,
+                                        email.text,
+                                        nome.text,
+                                        senha.text,
+                                        sobrenome.text) ==
+                                    0) {
+                                  Get.off(Homepage());
+                                }
+                              },
+                              focusNode: rsenhaFocus,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Este campo é obrigatório.';
@@ -173,46 +224,9 @@ class _RegisterState extends State<Register> {
                             Button(
                                 text: 'CADASTRE-SE!',
                                 color: const Color(0xFFDDC90F),
-                                onPressed: () async {
-                                  if (_Formkey.currentState!.validate()) {
-                                    var registered = await Client(
-                                            cpf: cpf.text,
-                                            email: email.text,
-                                            nome: nome.text,
-                                            senha: senha.text,
-                                            sobrenome: sobrenome.text)
-                                        .register();
-                                    switch (registered) {
-                                      case 1:
-                                        Get.snackbar('Ops',
-                                            'Este usuário já está cadastrado',
-                                            icon: Icon(Icons.warning),
-                                            backgroundColor:
-                                                Colors.yellow.withOpacity(0.1));
-                                        break;
-                                      case 2:
-                                        Get.snackbar('Ops',
-                                            'Ocorreu um erro, contate o suporte.',
-                                            icon: Icon(Icons.warning),
-                                            backgroundColor:
-                                                Colors.red.withOpacity(0.1));
-                                        break;
-                                      case 0:
-                                        await Get.snackbar('Cadastrado',
-                                            'Sua conta foi cadastrada com sucesso',
-                                            icon: Icon(Icons.check),
-                                            backgroundColor:
-                                                Colors.green.withOpacity(0.1));
-                                        Get.off(() => Homepage());
-                                        break;
-                                      default:
-                                        Get.snackbar('Ops',
-                                            'Ocorreu um erro, contate o suporte.',
-                                            icon: Icon(Icons.warning),
-                                            backgroundColor:
-                                                Colors.red.withOpacity(0.1));
-                                    }
-                                  }
+                                onPressed: () {
+                                  login(_Formkey, cpf.text, email.text,
+                                      nome.text, senha.text, sobrenome.text);
                                 },
                                 radius: 20)
                           ],
