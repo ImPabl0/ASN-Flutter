@@ -40,6 +40,7 @@ dependencies:
   dio: ^4.0.6
   flutter_launcher_icons: ^0.10.0
   get: ^4.6.5
+  lottie: ^2.0.0
   
 
 dev_dependencies:
@@ -70,7 +71,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/lowpoly.png
+    - assets/images/background1.jpg
+    - assets/animations/asn.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

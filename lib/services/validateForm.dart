@@ -3,8 +3,14 @@ import 'package:asn_flutter/services/client.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Future<int> login(GlobalKey<FormState> Formkey, String cpf, String email,
-    String nome, String senha, String sobrenome) async {
+Future<int> login(
+    GlobalKey<FormState> Formkey,
+    BuildContext context,
+    String cpf,
+    String email,
+    String nome,
+    String senha,
+    String sobrenome) async {
   if (Formkey.currentState!.validate()) {
     var registered = await Client(
             cpf: cpf,
@@ -28,6 +34,7 @@ Future<int> login(GlobalKey<FormState> Formkey, String cpf, String email,
         Get.snackbar('Cadastrado', 'Sua conta foi cadastrada com sucesso',
             icon: Icon(Icons.check),
             backgroundColor: Colors.green.withOpacity(0.1));
+        Navigator.pop(context);
         Get.off(() => Homepage());
         break;
       default:

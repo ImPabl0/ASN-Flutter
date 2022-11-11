@@ -1,6 +1,6 @@
+import 'package:asn_flutter/routes/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'homepage.dart';
 import './routes/register.dart';
 
 void main() {
@@ -15,5 +15,5 @@ void main() {
           transition: Transition.cupertino,
         )
       ],
-      home: const Homepage()));
+      home: const splashscreen()));
 }
