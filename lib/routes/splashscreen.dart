@@ -33,12 +33,14 @@ class _splashscreenState extends State<splashscreen>
         backgroundColor: Colors.white,
         body: Center(
             child: Lottie.asset(
+          repeat: false,
           'assets/animations/asn.json',
           onLoaded: (composition) {
             _controller
               ..duration = composition.duration
-              ..forward().whenComplete(() =>
-                  Get.to(() => Homepage(), transition: Transition.downToUp));
+              ..forward().whenComplete(() => Get.to(() => Homepage(),
+                  transition: Transition.fade,
+                  duration: Duration(milliseconds: 1500)));
           },
         )),
       ),
