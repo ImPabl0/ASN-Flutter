@@ -6,7 +6,6 @@ import './routes/register.dart';
 void main() {
   runApp(GetMaterialApp(
       title: 'ASN Software',
-      debugShowCheckedModeBanner: false,
       theme: ThemeData(brightness: Brightness.dark, primarySwatch: Colors.grey),
       getPages: [
         GetPage(

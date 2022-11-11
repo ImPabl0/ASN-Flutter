@@ -205,7 +205,6 @@ class _RegisterState extends State<Register> {
                                   ),
                                 ),
                                 TextFormField(
-                                  autofocus: false,
                                   onFieldSubmitted: (value) {
                                     FocusScope.of(context)
                                         .requestFocus(FocusNode());
